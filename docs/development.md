@@ -68,6 +68,22 @@ The patcher's hooks name methods in `Core.dll`. After an MTGA update:
 
 ## Testing
 
+### Cube direct challenges
+
+The Friends challenge screen includes **Cube / 40-card**. It uses the saved-deck `Draft` rules (40+ main-deck cards,
+supported non-rebalanced cards, no command zone), so Commander-set cards can be played in an ordinary cube deck.
+Save the deck as **Draft** in the deck builder. The existing Draft validator still limits nonbasic cards to four copies.
+
+The bridge uses the previously unused `DirectGameTournamentAlchemy` match slot and the `DirectGameCube` deck-format alias.
+Keep `ChallengeSlots.Slots`, `ForgeFormats.DIRECT_SLOTS`, and `ChallengeService.FORMAT_OF` synchronized. The alias deliberately
+uses the constructed-type `Draft` spec rather than event-only `Limited`, so saved decks do not require a draft event.
+Both players need the updated bridge and server. No coordinator deployment is needed; it already accepts this challenge name.
+Headless coverage is in `QueueCheck` (`tools\verify.ps1 -SkipClient -Only sp-queues`). In the real client, create a challenge,
+select Cube / 40-card, select a saved 40-card Draft deck containing a Commander-set card, ready both players, and start.
+Verify both best-of-one and best-of-three; a 39-card deck should be rejected and the existing formats should remain available.
+
+### General checks
+
 - **Headless self-play** (`forge.mtga.SelfPlay`): a fake client answers every request at random and checks each diff the way the real client merges it (diff chaining, zone and id consistency, annotations present, request ids valid). It runs through `tools\verify.ps1 -SkipClient`, with recipes for every queue and format.
 - **Rigs** ([rigs.md](rigs.md)): deterministic test matches with fixed hands and boards, for reproducing a card interaction in the real client (`tools\play.ps1 -Rig <name>`).
 - **Real client:** `tools\play.ps1` for one player against the AI. For online play, two instances on one PC:
