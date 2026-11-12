@@ -32,6 +32,19 @@ reproduce a bug or regression-test a feature without playing to it by chance. Ri
 
 ## Rigs
 
+The `delve` rig puts Treasure Cruise in hand, eight Islands and Savannah Lions in play, and six
+specific cards in the graveyard. SelfPlay deliberately exiles Grizzly Bears and Hill Giant,
+preserves Think Twice and the other spells, and checks exactly six Islands are tapped for the
+remaining mana. The payment prompt must occur only after the player selects the cast.
+`delve-zero` chooses no cards and pays all eight mana. `delve-cancel` cancels the selection;
+`delve-unpayable` has only two Islands and selects too few cards to afford the remaining cost.
+Both failure cases check the spell returns to hand, all six graveyard cards remain, and no
+Islands remain tapped. `sp-delve-manual` runs the partial-payment case with Full Control.
+
+Run `tools\verify.ps1 -SkipClient -Only sp-delve,sp-delve-zero,sp-delve-cancel,sp-delve-unpayable,sp-delve-manual`.
+The recipes preserve the passive fixture decks. These tests are added but runtime execution
+and real-client verification remain pending because local schemas and client data are absent.
+
 The `protection` rig puts Mother of Runes and Grizzly Bears in play. SelfPlay activates Mother,
 targets the Bears, chooses blue, and checks the engine actually grants protection from blue.
 `protection-artifact` instead casts Apostle's Blessing, explicitly accepts the artifact option,

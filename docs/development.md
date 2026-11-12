@@ -113,6 +113,18 @@ Verify both best-of-one and best-of-three; a 39-card deck should be rejected and
 
 ### General checks
 
+Delve has a separate controller hook from ordinary exile costs. `CostAdjustment.adjust` calls
+it during both affordability predictions and real payment, so the contextual overload of
+`chooseCardsToDelve` carries the spell and `test` flag; existing controllers retain their old
+implementation through the default overload. The Arena controller only asks during payment.
+For delve spells it uses `PlaySpellAbility.payManaCost` even with automatic mana selection:
+that path stages selected cards and exiles them only after the remaining mana is paid.
+The initial auto-tap preview must not be executed before this choice, because the player may
+choose fewer cards or zero. Cancellation is distinct from selecting zero, and an unpaid
+ordinary cast uses the existing undo checkpoint when it remains safe to restore (no library
+or random changes). Rigs: `delve`,
+`delve-zero`, `delve-cancel`, `delve-unpayable`; Full Control recipe: `sp-delve-manual`.
+
 - **Headless self-play** (`forge.mtga.SelfPlay`): a fake client answers every request at random and checks each diff the way the real client merges it (diff chaining, zone and id consistency, annotations present, request ids valid). It runs through `tools\verify.ps1 -SkipClient`, with recipes for every queue and format.
 - **Rigs** ([rigs.md](rigs.md)): deterministic test matches with fixed hands and boards, for reproducing a card interaction in the real client (`tools\play.ps1 -Rig <name>`).
 - **Real client:** `tools\play.ps1` for one player against the AI. For online play, two instances on one PC:

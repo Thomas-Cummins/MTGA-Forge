@@ -327,6 +327,10 @@ try {
                 Run-SelfPlay "sp-$rig" $null $props
             }
         }
+        foreach ($rig in 'delve', 'delve-zero', 'delve-cancel', 'delve-unpayable') {
+            if (Wanted "sp-$rig") { Run-SelfPlay "sp-$rig" $null "-Dmtga.deck=$rig -Dmtga.rig=$rig -Dselfplay.ai=plains" }
+        }
+        if (Wanted 'sp-delve-manual') { Run-SelfPlay 'sp-delve-manual' $null '-Dmtga.deck=delve -Dmtga.rig=delve -Dselfplay.ai=plains -Dselfplay.fullcontrol=true' }
         foreach ($f in 'Standard', 'Pioneer', 'Modern', 'Brawl') { if (Wanted "sp-$f") { Run-SelfPlay "sp-$f" $f } }
         # Legacy / Vintage / Pauper / Premodern: the built-in decks against each other (Moxen, Workshops, Tron... rather than generated piles)
         foreach ($f in 'Legacy', 'Vintage', 'Pauper', 'Premodern') { if (Wanted "sp-$f") { Run-SelfPlay "sp-$f" $null "-Dselfplay.builtin=$f" } }
