@@ -29,6 +29,8 @@ param(
     [string]$Peer = '',
     [string]$PeerKey = '',
     [string]$FriendCode = '',
+    [ValidatePattern('^[A-Za-z0-9_-]*$')][string]$CubeFile = '',
+    [ValidatePattern('^[^"\r\n]*$')][string]$CubeTitle = '',
     [switch]$Offline,
     [switch]$SocialSpike,
     [string]$Coordinator = '',
@@ -121,6 +123,10 @@ try {
     if ($busy) { Stop-WithMessage "Port $(($busy.LocalPort | Sort-Object -Unique) -join ', ') is used by another program ($((Get-Process -Id $busy[0].OwningProcess -ErrorAction SilentlyContinue).ProcessName)). Close it and start again." }
 
     $p2pArgs = @()
+    # Pass custom cube settings only to the game server. JAVA_TOOL_OPTIONS would
+    # also affect patch tools and print a misleading NativeCommandError in PS 5.1.
+    if ($CubeFile) { $p2pArgs += "-Dmtga.premier.cube=$CubeFile" }
+    if ($CubeTitle) { $p2pArgs += "-Dmtga.premier.cubeTitle=`"$CubeTitle`"" }
     if ($SocialSpike) { $p2pArgs += '-Dmtga.social=spike' }      # developer: fake friend list (stage 2 spike)
     if ($Offline) { $p2pArgs += '-Dmtga.p2p=off' }
     elseif (-not $P2P) {

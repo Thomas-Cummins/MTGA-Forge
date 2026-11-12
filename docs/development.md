@@ -74,7 +74,9 @@ For a shared custom Premier Draft pool, `tools/private-cube.ps1 -FriendCode <sha
 `PrewarIconic` cube and changes the event title for that session. The package needs matching files in
 `server/forge-gui/res/cube` and `server/forge-gui/res/draft`. Both players must install the same pool and use the same
 code; the existing Vintage Cube event id is reused, so the code is necessary to isolate it from the public table queue.
-The custom launch sets Java properties and bridge display environment variables only for its process tree.
+The custom launch passes cube properties directly to the Java server and sets bridge display variables for its process tree.
+Do not use `JAVA_TOOL_OPTIONS` for the cube: it also affects the patch tools and its stderr announcement appears as a
+`NativeCommandError` under Windows PowerShell 5.1, even when Java succeeds.
 Launching normally retains Vintage Cube. Validate custom lists against Forge and the client's card database;
 the draft engine otherwise filters out cards the client cannot show.
 
