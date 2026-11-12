@@ -1,0 +1,672 @@
+{
+  "controller:pilotsNonAggroDeck()": {
+    "status": "Infrastructure",
+    "note": "AI profile, memory, reporting, or execution support; not itself a prompt for a player decision.",
+    "fingerprint": "1b98f9075d14fa30facd2e8807e30d21aab6374f022bf0e3a4b4d795a44c4af7"
+  },
+  "controller:setupAutoProfile(Deck)": {
+    "status": "Infrastructure",
+    "note": "AI profile, memory, reporting, or execution support; not itself a prompt for a player decision.",
+    "fingerprint": "981bad7bc63f5d45ede774548e2cb8652236f4853a53792022d23c0704d18c38"
+  },
+  "controller:getAi()": {
+    "status": "Infrastructure",
+    "note": "AI profile, memory, reporting, or execution support; not itself a prompt for a player decision.",
+    "fingerprint": "b03f853f80df49430a16c52dfc11ddae9c6885c94c2189b5d91c17fd8d148d25"
+  },
+  "controller:getSideboardingReport()": {
+    "status": "Infrastructure",
+    "note": "AI profile, memory, reporting, or execution support; not itself a prompt for a player decision.",
+    "fingerprint": "1699052c7d4eaf04453395db7c678f2fa8818781b1101c4c334ded020c48c7c4"
+  },
+  "controller:playWithRollback(SpellAbility,Consumer<SpellAbility>)": {
+    "status": "Infrastructure",
+    "note": "AI profile, memory, reporting, or execution support; not itself a prompt for a player decision.",
+    "fingerprint": "ac586932c88a56e891d42857574f3d225b48368178a0f7d8ad707d6344906cd9"
+  },
+  "controller:resetAtEndOfTurn()": {
+    "status": "Infrastructure",
+    "note": "AI profile, memory, reporting, or execution support; not itself a prompt for a player decision.",
+    "fingerprint": "2ee2246362e4120c09b7b79a7f0f88fe909dc640ca3a013255bc8425bbf7bae9"
+  },
+  "controller:autoPassCancel()": {
+    "status": "Infrastructure",
+    "note": "Inherited no-op for Forge GUI input coordination; Arena uses its own session and settings.",
+    "fingerprint": "f932692d3266d610feae2fa764de8ac68fe1ce1a4205de36fd6b3ec52485f1c3"
+  },
+  "controller:awaitNextInput()": {
+    "status": "Infrastructure",
+    "note": "Inherited no-op for Forge GUI input coordination; Arena uses its own session and settings.",
+    "fingerprint": "76eeb61e4161e443ec850139082e6cd9007621072407da9239e4f7e46a447484"
+  },
+  "controller:cancelAwaitNextInput()": {
+    "status": "Infrastructure",
+    "note": "Inherited no-op for Forge GUI input coordination; Arena uses its own session and settings.",
+    "fingerprint": "545750ab96bf350ca4d6be51f07b3774b8bc2d1858f88040bd95400ad6d4c7d1"
+  },
+  "controller:notifyOfValue(SpellAbility,GameObject,String)": {
+    "status": "Needs path review",
+    "note": "Notification/display surface rather than a choice; trace supported modes and whether Arena already communicates the information.",
+    "fingerprint": "63dbc7230dd36c27891a5e4fb885ecf5af81c5afbe5c1a263d26f8b0c95c937f"
+  },
+  "controller:revealAnte(String,Multimap<Player,PaperCard>)": {
+    "status": "Needs path review",
+    "note": "Notification/display surface rather than a choice; trace supported modes and whether Arena already communicates the information.",
+    "fingerprint": "993261a65bc5ad7132fdd15a844957d219a8e4c56bed787df8605bcd7743d6e4"
+  },
+  "controller:revealAISkipCards(String,Map<Player,Map<DeckSection,List<?extendsPaperCard>>>)": {
+    "status": "Needs path review",
+    "note": "Notification/display surface rather than a choice; trace supported modes and whether Arena already communicates the information.",
+    "fingerprint": "38c1bbb69b9e86621e2dc8351f036c360bed90bd42526ea3654e38fb6e80d841"
+  },
+  "controller:revealUnsupported(Map<Player,List<PaperCard>>)": {
+    "status": "Needs path review",
+    "note": "Notification/display surface rather than a choice; trace supported modes and whether Arena already communicates the information.",
+    "fingerprint": "6ab0df887a5bbb34e278a9aa874ca75843549fb141a553e513b4da4c3f2f8c9a"
+  },
+  "controller:reveal(List<CardView>,ZoneType,PlayerView,String,boolean)": {
+    "status": "Needs path review",
+    "note": "This view-based overload only remembers cards for AI. The card-based overload is overridden; trace callers before deciding whether a reveal is missing.",
+    "fingerprint": "8f37190163ec80e20f657d97680f08c819446aa3f37f79fcec72f7055754726c"
+  },
+  "controller:sideboardsByItself()": {
+    "status": "Alternate route",
+    "note": "Match checks person.isAI() before automatic sideboarding; MtgaController reports false. Arena has a separate sideboard workflow.",
+    "fingerprint": "adb6b69568457fc731f3e169a76b62718700b4b7b413332606766d6519702056"
+  },
+  "controller:sideboard(Deck,GameType,String)": {
+    "status": "Alternate route",
+    "note": "ForgeBackend has its own Arena sideboard screen. Check any additional engine routes before removing or changing the inherited method.",
+    "fingerprint": "f92f328bd9604833b82d5b0ec815ada6d8e6a8f1757b073a13962bd8f64db012"
+  },
+  "controller:getAbilityToPlay(Card,List<SpellAbility>,ITriggerEvent)": {
+    "status": "Choice gap",
+    "note": "Returns the first ability. PlayEffect, DiscoverEffect, and ChangeZoneEffect call this to choose among possible plays; multiple choices need human routing.",
+    "fingerprint": "ca4416ec0af12fe414d7fd62547ca7943ca338a2cb0805b4aa6f9ef2b6187df5"
+  },
+  "controller:assignCombatDamage(Card,CardCollectionView,CardCollectionView,int,GameEntity,boolean)": {
+    "status": "Choice gap",
+    "note": "Combat and some damage effects call AI damage distribution; attacker/blocker selection does not provide damage allocation.",
+    "fingerprint": "761819f1a7df1184fefba5505bbc3f640864fbc2ca6b017e8ad42466e2195ee8"
+  },
+  "controller:divideShield(Card,Map<GameEntity,Integer>,int)": {
+    "status": "Choice gap",
+    "note": "Inherited implementation returns an empty map; replacement damage-shield distribution needs a human allocation when reachable.",
+    "fingerprint": "8ab9419aef8bbf580f916d8a33682fc8fd6e7dc41023f88715f6ba41b681d829"
+  },
+  "controller:specifyManaCombo(SpellAbility,ColorSet,int,boolean)": {
+    "status": "Delegates to Arena",
+    "note": "Loops through virtual chooseColor calls, which MtgaController overrides. No separate missing prompt is established by inheritance alone.",
+    "fingerprint": "2b1e8a20cbd48d02ad6df86dcad836b016bf0747a9b1b705526add01774372ab"
+  },
+  "controller:chooseContraptionsToCrank(List<Card>)": {
+    "status": "Delegates to Arena",
+    "note": "Filters contraptions through virtual confirmTrigger, which the human controller overrides. Contraption display/mode support is a separate concern.",
+    "fingerprint": "ad0b42ffc359b646e7a7b3d8c801005e3c9e2985dbea949a14fd8f3581d0f501"
+  },
+  "controller:chooseEntitiesForEffect(FCollectionView<T>,int,int,DelayedReveal,SpellAbility,String,Player,Map<String,Object>)": {
+    "status": "Delegates to Arena",
+    "note": "Loops through chooseSingleEntityForEffect. Card choices can reach Arena; the non-card gap in that override still applies.",
+    "fingerprint": "4f945d6a6adb600144ef3519772ded2d92486aedae922f84c18aa3e111e2285b"
+  },
+  "controller:chooseSpellAbilitiesForEffect(List<SpellAbility>,SpellAbility,String,int,Map<String,Object>)": {
+    "status": "Partial override",
+    "note": "Loops through chooseSingleSpellForEffect, whose Arena override only handles Venture. Other ability choices remain AI controlled.",
+    "fingerprint": "e219b1a196a0b7d9d8c819cee4b0eb91c7357af9d3b4070922b41518d223c214"
+  },
+  "controller:helpPayForAssistSpell(ManaCostBeingPaid,SpellAbility,int,int)": {
+    "status": "Mode-specific choice",
+    "note": "Assist contribution or helper selection is automated/declined. Assess multiplayer support and add an assist-specific rig before implementing.",
+    "fingerprint": "e34448648a12b31c7ae1afe05a419ca52947333ccdb654b2b2ae574c5f6cebb5"
+  },
+  "controller:choosePlayerToAssistPayment(FCollectionView<Player>,SpellAbility,String,int)": {
+    "status": "Mode-specific choice",
+    "note": "Assist contribution or helper selection is automated/declined. Assess multiplayer support and add an assist-specific rig before implementing.",
+    "fingerprint": "385f55bd7f7db98d9c4f6e6f176244cbbee8c4c13a2e306eb012357d401afed8"
+  },
+  "controller:confirmBidAction(SpellAbility,PlayerActionConfirmMode,String,int,Player)": {
+    "status": "Choice gap",
+    "note": "Inherited code decides the bid, static application, draw offer, or payment automatically. Trace callers and ask the responsible human when a real choice is exposed.",
+    "fingerprint": "ef8135d765474db0056176621ab4e71ac0dd7e35240536e20c479265ec7a5c3b"
+  },
+  "controller:confirmStaticApplication(Card,PlayerActionConfirmMode,String,String)": {
+    "status": "Choice gap",
+    "note": "Inherited code decides the bid, static application, draw offer, or payment automatically. Trace callers and ask the responsible human when a real choice is exposed.",
+    "fingerprint": "84dc7f386f58191c536997a3c360060d508c81b68c8165e39f1e8cf8241ce03f"
+  },
+  "controller:acceptsDrawOffer()": {
+    "status": "Choice gap",
+    "note": "Inherited code decides the bid, static application, draw offer, or payment automatically. Trace callers and ask the responsible human when a real choice is exposed.",
+    "fingerprint": "02421f242d3f5516e0209077c79b66c1998ecaa2fb32a29c889f31ae6f629f8e"
+  },
+  "controller:confirmPayment(CostPart,String,SpellAbility)": {
+    "status": "Choice gap",
+    "note": "Inherited code decides the bid, static application, draw offer, or payment automatically. Trace callers and ask the responsible human when a real choice is exposed.",
+    "fingerprint": "620432a5002268dfdc9973ce9f7259987652ebdc284d6f417b3e0a309775d04c"
+  },
+  "controller:exertAttackers(List<Card>)": {
+    "status": "Choice gap",
+    "note": "PhaseHandler calls AI selection of optional attack costs. Human attacker selection alone does not implement these choices.",
+    "fingerprint": "d7ea41790b030a560a2a86b541800292d3e9858c13ef3537c087c2beb627458e"
+  },
+  "controller:enlistAttackers(List<Card>)": {
+    "status": "Choice gap",
+    "note": "PhaseHandler calls AI selection of optional attack costs. Human attacker selection alone does not implement these choices.",
+    "fingerprint": "df07de44d29d06e49daaab64b1d599164fec2a207826c26c5bbb043d9befd919"
+  },
+  "controller:orderBlockers(Card,CardCollection)": {
+    "status": "Needs path review",
+    "note": "Inherited AI combat ordering; establish whether the active combat rules require an order before adding a workflow.",
+    "fingerprint": "eeb5e73f39671414fe0888a5982de97c34ad5da43489e1236fd00b2908a85b10"
+  },
+  "controller:orderBlocker(Card,Card,CardCollection)": {
+    "status": "Needs path review",
+    "note": "Inherited AI combat ordering; establish whether the active combat rules require an order before adding a workflow.",
+    "fingerprint": "9eaaa3664c1b2c9998f370e696a7c1b726daa2a6672eaa4adc6dfe01189430ab"
+  },
+  "controller:orderAttackers(Card,CardCollection)": {
+    "status": "Needs path review",
+    "note": "Inherited AI combat ordering; establish whether the active combat rules require an order before adding a workflow.",
+    "fingerprint": "555bd7bc179413428c56d3a70177868f921d03ad9a2ac8808183a6e7e0cbb9e9"
+  },
+  "controller:willPutCardOnTop(Card)": {
+    "status": "Choice gap",
+    "note": "ClashEffect calls this to decide top versus bottom; inherited code uses AI scry heuristics.",
+    "fingerprint": "1d60b6d9720d7d9235a009173c7019bab9a821ee58b1435761a2cf639adeb612"
+  },
+  "controller:playSpellAbilityNoStack(SpellAbility,boolean)": {
+    "status": "Needs path review",
+    "note": "These execution routes can call AI target/trigger preparation before playing. Trace no-stack and replacement triggers; normal stack targeting is handled elsewhere.",
+    "fingerprint": "bd8ff4fb06a2948bb179dbeb741674d85bd3f39f7cb03a45fd5e7b9fea3c69f8"
+  },
+  "controller:playTrigger(Card,WrappedAbility,boolean)": {
+    "status": "Needs path review",
+    "note": "These execution routes can call AI target/trigger preparation before playing. Trace no-stack and replacement triggers; normal stack targeting is handled elsewhere.",
+    "fingerprint": "cff83b8f3cf0d4c1e4d7c0cb14991aa6144ece49bf305b892d4046576c91f964"
+  },
+  "controller:chooseCardsToDelve(int,CardCollection)": {
+    "status": "Alternate route",
+    "note": "Legacy delegate retained for compatibility/predictions. CostAdjustment now calls the contextual overload, which the human controller overrides for actual payment.",
+    "fingerprint": "8117f560980d7178302a9e646092c92df4d3228fe2ae366520f2f71da2402520"
+  },
+  "controller:chooseCardsToDiscardUnlessType(int,CardCollectionView,String[],SpellAbility)": {
+    "status": "Choice gap",
+    "note": "Automatically selects a qualifying card or AI discard list; separate from the overridden ordinary discard hook.",
+    "fingerprint": "5782ccf8c36562099b7e23f81a15a6111a1cdf4f2a8cfe67a9ee659c551a3245"
+  },
+  "controller:chooseManaFromPool(List<Mana>)": {
+    "status": "Needs path review",
+    "note": "Returns the first mana entry. Determine whether manual pool selection distinguishes sources/restrictions that matter to the player.",
+    "fingerprint": "00abd16c33072e98c492abb3189d5e5cff0a736d9ee84ea85ac9a1a81787602e"
+  },
+  "controller:vote(SpellAbility,String,List<Object>,ListMultimap<Object,Player>,Player,boolean)": {
+    "status": "Choice gap",
+    "note": "Delegates vote selection to ComputerUtil instead of the human.",
+    "fingerprint": "9fcb59016e775119b8992b70c26541faae0d0eeb0bdec0f6b1d4767b9d61bac3"
+  },
+  "controller:chooseSticker(List<Sticker>,Card,SpellAbility,boolean)": {
+    "status": "Mode-specific choice",
+    "note": "Uses an AI/default/random answer for stickers, sectors, contraptions, or planar dice. Assess whether the mechanic and its client representation are supported.",
+    "fingerprint": "118ffa871bb68e00b03a789dc6ea5b3e63d52fb96ee69977291e46321f92d62b"
+  },
+  "controller:chooseStickerNamePosition(Sticker,Card)": {
+    "status": "Mode-specific choice",
+    "note": "Uses an AI/default/random answer for stickers, sectors, contraptions, or planar dice. Assess whether the mechanic and its client representation are supported.",
+    "fingerprint": "8cb632dc4c905039f6bf3907c74d908a2621ae6ef7ef9c8e1a41f78e6e8e422a"
+  },
+  "controller:chooseCardToKeepStickers(CardCollectionView)": {
+    "status": "Mode-specific choice",
+    "note": "Uses an AI/default/random answer for stickers, sectors, contraptions, or planar dice. Assess whether the mechanic and its client representation are supported.",
+    "fingerprint": "a3a3166bf86493a6fc1fb9b67a92a766b083da3c8730aa4bd92a3590b850c816"
+  },
+  "controller:chooseSector(Card,String,List<String>)": {
+    "status": "Mode-specific choice",
+    "note": "Uses an AI/default/random answer for stickers, sectors, contraptions, or planar dice. Assess whether the mechanic and its client representation are supported.",
+    "fingerprint": "dbe833fbfb5ee0b53814ea0d4aa38dc092b6931bb2df683fc604ff6814d4c771"
+  },
+  "controller:chooseSprocket(Card,List<Integer>)": {
+    "status": "Mode-specific choice",
+    "note": "Uses an AI/default/random answer for stickers, sectors, contraptions, or planar dice. Assess whether the mechanic and its client representation are supported.",
+    "fingerprint": "7cc18bd727217d4885d91b64adc9f74058db3e23a9aa7740575e26a4ac02dae1"
+  },
+  "controller:choosePDRollToIgnore(List<PlanarDice>)": {
+    "status": "Mode-specific choice",
+    "note": "Uses an AI/default/random answer for stickers, sectors, contraptions, or planar dice. Assess whether the mechanic and its client representation are supported.",
+    "fingerprint": "b1157113076a23ec4a0741cbb3c40ba225710f4ef59929680beebee4c3a6d1f8"
+  },
+  "controller:chooseRollToIgnore(List<Integer>)": {
+    "status": "Choice gap",
+    "note": "Dice-result choice is random/default rather than a player decision. A random roll itself should remain automatic; choosing among results should not.",
+    "fingerprint": "20c8bd42f96639360d0bad2c2c4e46a042b1f1ff3dc761b1f1b237052572f1e6"
+  },
+  "controller:chooseDiceToReroll(List<Integer>)": {
+    "status": "Choice gap",
+    "note": "Dice-result choice is random/default rather than a player decision. A random roll itself should remain automatic; choosing among results should not.",
+    "fingerprint": "983155978ff6ea833b9b585bfdc5b84115d0b1edfee9737a82a83ed5e16779b0"
+  },
+  "controller:chooseRollToModify(List<Integer>)": {
+    "status": "Choice gap",
+    "note": "Dice-result choice is random/default rather than a player decision. A random roll itself should remain automatic; choosing among results should not.",
+    "fingerprint": "5c02e6dc9998e262ee2fde08fb982fa33279fbfe11c16bc07350bec3276f0dd7"
+  },
+  "controller:chooseRollToSwap(List<DieRollResult>)": {
+    "status": "Choice gap",
+    "note": "Dice-result choice is random/default rather than a player decision. A random roll itself should remain automatic; choosing among results should not.",
+    "fingerprint": "d37e9415a3c68b0f7cc67f0e031611312b5ee1d17ab3345fbc68580f59a227b6"
+  },
+  "controller:chooseRollSwapValue(List<String>,Integer,int,int)": {
+    "status": "Choice gap",
+    "note": "Dice-result choice is random/default rather than a player decision. A random roll itself should remain automatic; choosing among results should not.",
+    "fingerprint": "ec76e5decaaa741de47558c6c76d75c3bb79d5b83764526b894ebb8aaad9f7f3"
+  },
+  "controller:chooseCardsToRevealFromHand(int,int,CardCollectionView)": {
+    "status": "Choice gap",
+    "note": "Returns the first eligible cards, not a human selection.",
+    "fingerprint": "337ac13a34571db2e9baa7917987b7e990da07145d850dc7f6293f823b80194b"
+  },
+  "controller:chooseStartingHand(List<PlayerZone>)": {
+    "status": "Mode-specific choice",
+    "note": "AI scores and selects a starting-hand zone. Assess special starting-hand rules separately from ordinary mulligans, which Arena handles.",
+    "fingerprint": "f997640075a4a34622fd2c8141a0be0ea3f1143e80e80871a3fb48ec15942b28"
+  },
+  "controller:chooseNumber(SpellAbility,String,int,int,Map<String,Object>)": {
+    "status": "Choice gap",
+    "note": "This overload still uses the AI effect handler. The plain min/max Arena override does not intercept it; counter effects are example callers.",
+    "fingerprint": "e430ea9db123b0f0feeb356f2d587c54807e6b06ec7e4ad8849a5a4e8c6b6e89"
+  },
+  "controller:chooseNumber(SpellAbility,String,List<Integer>,Player)": {
+    "status": "Choice gap",
+    "note": "Explicit-list numeric selection still uses AI. LifeSetEffect and ChooseNumberEffect can call this overload.",
+    "fingerprint": "ad92fae0fda2b9632c193b4358369f54b5999b1567c5cc0c165963c93aaedbb6"
+  },
+  "controller:chooseFlipResult(SpellAbility,Player,boolean)": {
+    "status": "Choice gap",
+    "note": "Inherited code chooses the coin-flip result/call. Trace the actual coin-flip route, including chooseBinary, rather than conflating choosing with random generation.",
+    "fingerprint": "0fa11f6032bdb71b6ed51cbee39118998c50209b448d96dcb3ab08a6d1ea1231"
+  },
+  "controller:chooseTarget(SpellAbility,List<Pair<SpellAbilityStackInstance,GameObject>>)": {
+    "status": "Choice gap",
+    "note": "Returns the first eligible ability/target pair. ChangeTargetsEffect uses this for selecting which target to change; Spellskite can reach this separate decision.",
+    "fingerprint": "35e9ae61a042a3501f57ebf0f905ecd72f5e0bdd2603d18accad1a308c361573"
+  },
+  "controller:chooseBinary(SpellAbility,String,BinaryChoiceType,Map<String,Object>)": {
+    "status": "Choice gap",
+    "note": "Parameter-map binary choices go straight to the AI effect handler, bypassing the implemented Boolean overload.",
+    "fingerprint": "b16bba11de006f219a929ad4822a75f7921daa60667f827744e17578d5fd74ad"
+  },
+  "controller:chooseCounterType(List<CounterType>,SpellAbility,String,Map<String,Object>)": {
+    "status": "Choice gap",
+    "note": "Multiple counter-type or keyword options are selected by AI; automatic selection of one forced option is fine.",
+    "fingerprint": "552ba6cae5c12bf2a2f2a3fef7904358445d73b66b48593c2b913936329b187d"
+  },
+  "controller:chooseKeywordForPump(List<String>,SpellAbility,String,Card)": {
+    "status": "Choice gap",
+    "note": "Multiple counter-type or keyword options are selected by AI; automatic selection of one forced option is fine.",
+    "fingerprint": "7a4698a19fdb55ba0b1527d1cc7f4dce9dcabef4b31e484bd1bd03bc693d099f"
+  },
+  "controller:chooseSingleReplacementEffect(List<ReplacementEffect>)": {
+    "status": "Choice gap",
+    "note": "ReplacementHandler asks this hook which applicable replacement to apply first. confirmReplacementEffect only covers whether to accept an optional replacement.",
+    "fingerprint": "16fcc7f1acfe57f9a3163d8c1cea5b70c202d4c3394f92c2a3ea3422ab11cd3f"
+  },
+  "controller:chooseSingleStaticAbility(List<StaticAbility>)": {
+    "status": "Choice gap",
+    "note": "Chooses the first static ability; CostAdjustment can present multiple cost-reduction abilities.",
+    "fingerprint": "d6c4dede41fcc87ee4bdeff1e9bbbe4a03bde5b8798fe6bde4c7e3bfd6f115d5"
+  },
+  "controller:payCombatCost(Card,Cost,SpellAbility,String)": {
+    "status": "Choice gap",
+    "note": "CombatUtil routes attack/block taxes through AI payment. Needs a payment/cancellation rig, including Ghostly Prison.",
+    "fingerprint": "adc25a66267b8b590f1539955b73dce2cb55df94b523d2d79249087fe4c35d4f"
+  },
+  "controller:chooseCardsForCost(CardCollectionView,SpellAbility,CostPartWithList,int,boolean,String)": {
+    "status": "Needs path review",
+    "note": "Inherited untested placeholder asserts false and otherwise uses AiCostDecision. Trace routes that bypass getCostDecisionMaker before implementing.",
+    "fingerprint": "106102bd1d9cfd24c0ffad0d001f987a3743523eb33fa7c8cd798bdfcf7f732a"
+  },
+  "controller:payCostDuringRoll(Cost,SpellAbility)": {
+    "status": "Choice gap",
+    "note": "Always declines the payment for rerolls/modification; real optional payments need human input.",
+    "fingerprint": "aa799a47f35c34d4bdb66f3f6c6e2c443f24a877816ab4f05dc1a16f09cb1b1f"
+  },
+  "controller:orderSimultaneousSa(List<SpellAbility>)": {
+    "status": "Alternate route",
+    "note": "Normal Arena stack-play bypasses this hook and loops through the incoming list. Missing trigger ordering must be fixed in orderAndPlaySimultaneousSa, not just here.",
+    "fingerprint": "563b76ae4c8b4419e15dd06cbaba39b9947621e70aa9c50701f8b64e9ddfaaaf"
+  },
+  "controller:chooseNewTargetsFor(SpellAbility,Predicate<GameObject>,boolean)": {
+    "status": "Choice gap",
+    "note": "Returns null. General retargeting needs an implementation; copied spells also use a distinct AI internal helper through superclass stack-play.",
+    "fingerprint": "103adfec8dd6896a0e8e29cb4f1d8a4a7c9c12073dab28a8cee8b917f73e35b7"
+  },
+  "controller:chooseCardsPile(SpellAbility,CardCollectionView,CardCollectionView,String)": {
+    "status": "Choice gap",
+    "note": "Evaluates piles with AI logic. Fact or Fiction uses this separately from the already implemented pile separation selection.",
+    "fingerprint": "3b8ceb0e0530b3a497ca7259da7ffcc3db85d3da9d01aefbe29a83085c69ce39"
+  },
+  "controller:complainCardsCantPlayWell(Deck)": {
+    "status": "Needs path review",
+    "note": "AI deck filtering can remove cards it cannot play well. Trace any human deck-preparation call before treating this as harmless infrastructure.",
+    "fingerprint": "ba7e401c9084e9ffc972ddb76088010620d3e05c15d9eb74f08cb2732321ea5d"
+  },
+  "controller:cheatShuffle(CardCollectionView)": {
+    "status": "Infrastructure",
+    "note": "Player.shuffle reaches this inherited helper, but AI assistance is gated by both an AI setting and GameRules.allowCheatShuffle, which defaults false; the Arena module does not enable it. Keep that guard when adding modes.",
+    "fingerprint": "dbc87a10bb9c5a550f3511c4cd908246067b52cff40ae28528ab41eb50b6959f"
+  },
+  "controller:chooseCardsYouWonToAddToDeck(List<PaperCard>)": {
+    "status": "Mode-specific choice",
+    "note": "Chooses all won cards in ante. Ante is separate from the ordinary Arena match workflow.",
+    "fingerprint": "69955f97fe82e4a2d844272b7c1e5fd1563665ec84799f48f29ed57ff07487da"
+  },
+  "controller:chooseCardsForConvokeOrImprovise(SpellAbility,ManaCost,CardCollectionView,boolean,boolean,Integer)": {
+    "status": "Choice gap",
+    "note": "AI selects payment permanents and mana shards. Ordinary tap-cost visitors do not replace this reduction path.",
+    "fingerprint": "27edb766030bb2ea0f481530cd44d7c893fc52d6ac5f54831e2cce18667c1ed4"
+  },
+  "controller:chooseSingleCardFace(SpellAbility,String,Predicate<ICardFace>,String)": {
+    "status": "Choice gap",
+    "note": "Inherited overload throws UnsupportedOperationException. The list-based override does not cover this signature; trace predicates used by callers.",
+    "fingerprint": "52837f26c3ade02e32541ee563bfc4639948ccb656b03ae2343f95298f17370b"
+  },
+  "controller:chooseSingleCardState(SpellAbility,List<CardState>,String,Map<String,Object>)": {
+    "status": "Choice gap",
+    "note": "Different card states/faces are selected by the AI effect handler. Verify how the client should present each caller.",
+    "fingerprint": "984cf346e4f1c483cc3aba8333a7978ab605c384573940806dba8b4d980ec3b0"
+  },
+  "controller:chooseCardsForSplice(SpellAbility,List<Card>)": {
+    "status": "Choice gap",
+    "note": "AI picks cards to splice based on its evaluation; this choice precedes ordinary casting payment.",
+    "fingerprint": "4f90f344f65cda53cfa441daab8ff7677b59af50d631e17cb7f6f4fab4f24985"
+  },
+  "controller:chooseOptionalCosts(SpellAbility,List<OptionalCostValue>)": {
+    "status": "Alternate route",
+    "note": "Normal castChosen explicitly calls askOptionalCosts. Trace other casting paths that may still call this inherited hook.",
+    "fingerprint": "bd48cf246e19a0feb5a949a68f4500e4eea08ab46bf728bc7ca8ab0b9bab988d"
+  },
+  "controller:chooseNumberForCostReduction(SpellAbility,int,int)": {
+    "status": "Choice gap",
+    "note": "Always chooses max. CostAdjustment calls this for UpTo reductions, so legal smaller amounts are not offered to the human.",
+    "fingerprint": "5023b6dbbae57b87081b4eecd058be391da3737e166f21488775096024169f99"
+  },
+  "controller:orderCosts(List<CostPart>)": {
+    "status": "Needs path review",
+    "note": "Returns the existing cost order. Human-style CostPayment can call this; determine when order is meaningful and reachable.",
+    "fingerprint": "17c528a91ab074d94127c6825c273bf4fa84bfa8cf3b5e9b392ee968701775a9"
+  },
+  "controller:chooseCardsForEffectMultiple(Map<String,CardCollection>,SpellAbility,String,boolean)": {
+    "status": "Choice gap",
+    "note": "DigMultipleEffect routes grouped card selection here; AI picks the best card from each group.",
+    "fingerprint": "a9275112d2a6e2a9144cfe676fe558735e58273f8cb52f312b84783068878bd1"
+  },
+  "controller:chooseSingleEntityForEffect(FCollectionView<T>,DelayedReveal,SpellAbility,String,boolean,Player,Map<String,Object>)": {
+    "status": "Partial override",
+    "note": "Prompts for Cards but delegates non-card entities, including Player, to AI. True-Name Nemesis is a cube example.",
+    "fingerprint": "497f39fe72dcbb6cf1099ebe71f32d5f6a644404ea306a802b34a08f0c74f6ec"
+  },
+  "controller:chooseSingleSpellForEffect(List<SpellAbility>,SpellAbility,String,Map<String,Object>)": {
+    "status": "Partial override",
+    "note": "Only Venture room selection prompts; other spell/ability selection goes to AI.",
+    "fingerprint": "2d56b1f92671b305f5a845400a946d50e40ebdfabe29060b4282049a1981ca65"
+  },
+  "controller:chooseSingleCardFace(SpellAbility,List<ICardFace>,String)": {
+    "status": "Partial override",
+    "note": "Only Venture dungeon selection prompts; other card-face choices go to AI.",
+    "fingerprint": "db3daf5b06453da65777a80d4c18707e4d62acfd8643169356c2785a7e1f4937"
+  },
+  "controller:chooseSomeType(String,SpellAbility,Collection<String>,boolean)": {
+    "status": "Partial override",
+    "note": "Only Creature and Basic Land types prompt. Other type categories retain AI choices.",
+    "fingerprint": "b578a5ff4c93ed9c19f89faa893e35dc8fecc116d9e8614e75f72e27ed53c215"
+  },
+  "controller:chooseBinary(SpellAbility,String,BinaryChoiceType,Boolean)": {
+    "status": "Partial override",
+    "note": "Only OddsOrEvens prompts. Tap/untap and other binary choice kinds still use superclass answers.",
+    "fingerprint": "da2240be91a04a7acbcf23ca308afcd3b9d9d2cee47d6f674096bb0e80bdb41c"
+  },
+  "controller:chooseModeForAbility(SpellAbility,List<AbilitySub>,int,int,boolean)": {
+    "status": "Partial override",
+    "note": "Repeatable modes explicitly use the AI implementation; ordinary nonrepeating modes have a prompt.",
+    "fingerprint": "8405254a88eed7a78a9ef496d703ef9dbb178125c9f549f310e19eb826007f84"
+  },
+  "controller:orderMoveToZoneList(CardCollectionView,ZoneType,SpellAbility)": {
+    "status": "Partial override",
+    "note": "Only multi-card library ordering prompts; other destinations use AI ordering. Check ordered-zone settings and relevant cards.",
+    "fingerprint": "c023d3735eae4c172a6585037bb0af8b219a85939024b2f0e09869d768d3ff40"
+  },
+  "controller:orderAndPlaySimultaneousSa(List<SpellAbility>)": {
+    "status": "Partial override",
+    "note": "No batch-order prompt; copied spells delegate to superclass AI retargeting. Targeted/modal triggers have separate human handling.",
+    "fingerprint": "134cccd54d533ed9ce9b053648a76e254f2076c830e81f9601c8b84ff18fd2fc"
+  },
+  "controller:payCostToPreventEffect(Cost,SpellAbility,boolean,FCollectionView<Player>)": {
+    "status": "Partial override",
+    "note": "Asks whether to pay, then constructs AiCostDecision directly, bypassing human choices for any selectable payment objects.",
+    "fingerprint": "b44e8b769440ab103f1ab8581215d29b492e9aef7941ff2416542ffcec52e0d5"
+  },
+  "controller:chooseNumberForKeywordCost(SpellAbility,Cost,KeywordInterface,String,int)": {
+    "status": "Partial override",
+    "note": "Uses superclass result as an upper bound, but superclass also applies strategic replicate limits and can suppress casualty; this is not purely an affordability bound.",
+    "fingerprint": "622a81cbaf4cba630ebc32c9e0a3ae67f94456a3453024ae41a482ce3a090c7f"
+  },
+  "controller:chooseStartingPlayer(boolean)": {
+    "status": "Partial override",
+    "note": "Later BO3 games prompt, but the default first-game route calls superclass. Trace coin-toss/challenge settings and decide which opening choices should be exposed.",
+    "fingerprint": "0c9ad738a404038d60f78ed36a75db658b3aec1ee10791863cf20ebc85e38216"
+  },
+  "controller:playSaFromPlayEffect(SpellAbility)": {
+    "status": "Needs path review",
+    "note": "Spell plays route to human casting; non-spells delegate to superclass. Trace relevant effect callers before adding prompts.",
+    "fingerprint": "2e2f11c7c0dd6805de67172af1ff0cc51bb00c42b8207d619434e5f3a08371ef"
+  },
+  "cost:visit(CostAddMana)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "3763d08ba61c9693b8484b2386c5d3f910c697b6fb30f148049b0559f3ab8037"
+  },
+  "cost:visit(CostDamage)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "9b640149f624a72aa9810c396be2acbb294970154c928bb5cacdb542b009b45f"
+  },
+  "cost:visit(CostFlipCoin)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "48ed22fec299aeef3812a937e433550c9343c213a5f66aab487390672acbfffb"
+  },
+  "cost:visit(CostRollDice)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "bf61151dc78caa575b3b6fed66e518b70c6441fd2bf60a2a15520b9e5d4c0320"
+  },
+  "cost:visit(CostGainLife)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "ec3eb3fe3edc74d97efc2fad8f745a4aea44d33f17826b320bc58610a3350666"
+  },
+  "cost:visit(CostMill)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "3741b2337cf29a6aad15711130cab3e2696cc72b56c419ff7c76d921618af91c"
+  },
+  "cost:visit(CostPartMana)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "d386e08c50ce7157c426bd736629a03a1e97d2d9d4ee7bc400aa530458921904"
+  },
+  "cost:visit(CostPayLife)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "880292d92d5f4bf4ece1439dcb432d7d9f7f0dc7799108e537711f8baa925e68"
+  },
+  "cost:visit(CostPayEnergy)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "e84646d5c5b1a11c81d506741e86a8b2f4e7c5fca971976476dc895a93e01fb2"
+  },
+  "cost:visit(CostTap)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "fad9cf2f5f5d664948f3eb8ba9454af561e4ca9300f5cbdc8b0e74c6dafafc2c"
+  },
+  "cost:visit(CostRevealChosen)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "3b9b94582054aed45caf6563280cf6afdbd5eddcca368454ad01215f8e36ea00"
+  },
+  "cost:visit(CostUntap)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "078db41c36e367d3a84cd9ad72f72c075359d87ab56c68eb68918f995e8c543e"
+  },
+  "cost:visit(CostPayShards)": {
+    "status": "Automatic cost",
+    "note": "Fixed amount or from-source payment mechanics; no independent object choice in this visitor. The decision to use the ability/payment belongs to the calling controller. Variable bounds still deserve individual rigs.",
+    "fingerprint": "2955a3b72bfb03bd964c0ef5b459c5dab00d8d37150484daeedcd93a6fc6b36c"
+  },
+  "cost:visit(CostChooseColor)": {
+    "status": "Delegates to Arena",
+    "note": "Calls virtual controller color/type selection; the relevant Arena overrides can supply the choice.",
+    "fingerprint": "557d4f8df83f1cbc8cf759e65cf389906b7b5c4c443691cfe7b9562a5436ff3f"
+  },
+  "cost:visit(CostChooseCreatureType)": {
+    "status": "Delegates to Arena",
+    "note": "Calls virtual controller color/type selection; the relevant Arena overrides can supply the choice.",
+    "fingerprint": "dd5506db436514c28dad7c0ad55815b414394b91bc86041003133f275325d21b"
+  },
+  "cost:visit(CostBehold)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "46da3868a8db9dc88b2e57fb46751fb539f6af772df2b5aa5d72703e14b90319"
+  },
+  "cost:visit(CostBeholdExile)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "3b4e756bc7ab7166d6378b6c6a4b5d0ab3811e0c3304b1175e4943846441235d"
+  },
+  "cost:visit(CostPromiseGift)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "3f973701568a20c8f72050eb9500c002cecab5acb55f8aa5f876c96b64fce189"
+  },
+  "cost:visit(CostExileFromStack)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "c003042d9a6f2cdaf27deaff36a090b40d862f69f625f174441611c5726c0781"
+  },
+  "cost:visit(CostExiledMoveToGrave)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "d79d0cc184cb154715b12ac8f19803cb423e98f92b739b76cc682de4f5dae977"
+  },
+  "cost:visit(CostExert)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "57f91db1144f7d318a9d4286fc6b34ebcac1e4875880505b683e5784e0f51f75"
+  },
+  "cost:visit(CostEnlist)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "f4bd31779abf31561ef1ea32827e6d8e11b1ed0d8dbdc9c645fa99d8a4db0571"
+  },
+  "cost:visit(CostForage)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "211c52e07a708f33b46c49737bae14f15d491ffa4a0bf89d9f153cf4986ad7e8"
+  },
+  "cost:visit(CostGainControl)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "0f104c03913b9b9e5146341cc80b2ddc8b3ca8968931b9ee53141c41e5863fc1"
+  },
+  "cost:visit(CostPutCardToLib)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "9607f4c6808fd1edbcae9cdaddbb2183db54b3a95207b1b26534b10fcb278609"
+  },
+  "cost:visit(CostPutCounter)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "fd73a5e539e97372f0d9dbe033f644ac887147b1b2b92cbd2a413f990c2bab73"
+  },
+  "cost:visit(CostTapType)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "769b83d276a3bee612a8a8805977604058d6b4d6bd432b90dd16ba24f99f082a"
+  },
+  "cost:visit(CostReveal)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "4242dd81bbae3b7547cdef890f809918e0b3bf97272f188be6c39876149a908d"
+  },
+  "cost:visit(CostRemoveAnyCounter)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "c881a0f5d59f9267e5ad3ff9840a85b1825f511445beeac4be3976e1b629958d"
+  },
+  "cost:visit(CostRemoveCounter)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "d74f594d468951f349c3483af6ea4efcf56e0806b2eebf41750fb93db385612d"
+  },
+  "cost:visit(CostUntapType)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "6c9928157c5c168c720629307832fc537b1922b3b537a97aff79938785a4f512"
+  },
+  "cost:visit(CostUnattach)": {
+    "status": "Choice gap",
+    "note": "Selects payment objects, a player, or a payment alternative automatically when multiple eligible options exist. Forced from-source cases may need no prompt. Add a cost-specific rig before changing.",
+    "fingerprint": "1c04fc1080bf868bdcef2ced4a1e8285082785c62488e24c66bf93df08efff67"
+  },
+  "cost:visit(CostDraw)": {
+    "status": "Needs path review",
+    "note": "Inspect defined recipients and amount/object selection; distinguish forced cost mechanics from a legal player choice. Blight delegates to the counter-placement visitor.",
+    "fingerprint": "d163f5754ded7f3848f18a025894124efae3b33fefc9abb6ef8f670a817709f5"
+  },
+  "cost:visit(CostPutCounterYou)": {
+    "status": "Needs path review",
+    "note": "Inspect defined recipients and amount/object selection; distinguish forced cost mechanics from a legal player choice. Blight delegates to the counter-placement visitor.",
+    "fingerprint": "8c1cf9b57cdddb3ae100a3f04c60431237c65d16a0e95ffe4e84c909f02b9905"
+  },
+  "cost:visit(CostBlight)": {
+    "status": "Needs path review",
+    "note": "Inspect defined recipients and amount/object selection; distinguish forced cost mechanics from a legal player choice. Blight delegates to the counter-placement visitor.",
+    "fingerprint": "b6465b02395d8e6594e814aa9d467ede270c329c8553d855db16f3f1bfdc1115"
+  },
+  "cost:visit(CostDiscard)": {
+    "status": "Partial override",
+    "note": "Normal selectable discards prompt, but same-name/different-name and some specialized cases fall back to AiCostDecision.",
+    "fingerprint": "f14c4e15c446d6c4b10f27cd41d51c06bc7784a342768b56eab93fdbebeb36f1"
+  },
+  "cost:visit(CostExile)": {
+    "status": "Partial override",
+    "note": "Normal single-zone fixed-count selection prompts; multi-zone, variable/structured, and special costs can fall back to AI.",
+    "fingerprint": "8c26d2c9263ba93786fe02c2f637a456f916ab59a940918bb2397f5cc4db5ba2"
+  },
+  "cost:visit(CostSacrifice)": {
+    "status": "Implemented hook",
+    "note": "Human selection exists for ordinary non-source costs. Forced/special cases delegate; test specialized selectors rather than assuming complete coverage.",
+    "fingerprint": "86630e5fa4cdfb0699711f6c8f9e472b7e535ce867520bb52bbd6db17d8ab32c"
+  },
+  "cost:visit(CostReturn)": {
+    "status": "Implemented hook",
+    "note": "Human selection exists for ordinary non-source costs. Forced/special cases delegate; test specialized selectors rather than assuming complete coverage.",
+    "fingerprint": "3eaa936134cb424077a2ec5412286f87f391c2bba3a84c64fd883bf3b0c6e110"
+  },
+  "cost:visit(CostCollectEvidence)": {
+    "status": "Implemented hook",
+    "note": "Weighted human selection is implemented; cancellation and exact threshold behavior still need runtime verification for the chosen card.",
+    "fingerprint": "04ded4051e834cbe0b2e37f3a47a182396c176d3cfdd87f462cb08826aa21bae"
+  },
+  "cost:removeCounter(GameEntityCounterTable,List<Card>,CounterEnumType,int)": {
+    "status": "Infrastructure",
+    "note": "Helper used by the inherited counter-payment strategy. Override the relevant visitor to supply human allocations, not this helper in isolation.",
+    "fingerprint": "94fba3790579e02ed119b8d1e19536d4707e07e8ef4072b0f253dd81280c4b19"
+  },
+  "cost:paysRightAfterDecision()": {
+    "status": "Infrastructure",
+    "note": "Payment scheduling policy; not itself a player choice.",
+    "fingerprint": "c144aca6deb604517bc93e0702150e8f1c91e27d0d41198f06adce1fba52e33d"
+  }
+}

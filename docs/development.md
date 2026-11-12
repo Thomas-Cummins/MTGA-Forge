@@ -138,6 +138,8 @@ or random changes). Rigs: `delve`,
 
 ## Known gaps
 
+- [Controller method inventory](controller-inventory.md): generated overload-by-overload coverage, reviewed player-choice gaps, and inherited cost handlers. Regenerate with `python3 tools/controller-inventory.py`; use `--check` to detect drift without building Forge.
+- [Human controller audit](controller-audit.md): AI fallbacks, cube examples, and proposed regression rigs for missing player decisions.
 - Some Forge decisions still fall back to the AI where the client has no matching prompt. Report the card; the fix is usually a new `MtgaController` override.
 - Animations for a few rare state changes (some emblems, tokens moving to exile) can be missing even though the game state is right. Self-play reports them as sync findings.
 - Display-only data from an online opponent is self-reported: their rank badge, cosmetics, and the names in a premier draft pod ([architecture.md](architecture.md#fair-play-and-identity-what-is-and-isnt-protected)).
