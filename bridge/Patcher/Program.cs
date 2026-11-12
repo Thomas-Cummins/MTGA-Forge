@@ -48,6 +48,22 @@ var target = awake.Body.Instructions.Single(i =>
 target.Operand = core.ImportReference(bridgeRun);
 Console.WriteLine("patched Bootstrap.Awake -> " + bridgeRun.FullName);
 
+// The widget has legacy tournament-specific position overrides after its table lookup.
+// Restore the Forge mapping after every refresh, including status updates from the server.
+var restoreChallenge = core.ImportReference(bridge.GetType("ForgeBridge.ChallengeSlots").Methods.Single(m => m.Name == "RestoreSelection"));
+var refreshChallenge = core.GetType("UnifiedChallengeBladeWidget").Methods.Single(m => m.Name == "SetChallengeOption_ChallengeType" && m.Parameters.Count == 1);
+var challengeIl = refreshChallenge.Body.GetILProcessor();
+foreach (var ret in refreshChallenge.Body.Instructions.Where(i => i.OpCode == OpCodes.Ret).ToList())
+{
+    ret.OpCode = OpCodes.Ldarg_0;
+    var loadType = challengeIl.Create(OpCodes.Ldarg_1);
+    var restore = challengeIl.Create(OpCodes.Call, restoreChallenge);
+    challengeIl.InsertAfter(ret, loadType);
+    challengeIl.InsertAfter(loadType, restore);
+    challengeIl.InsertAfter(restore, challengeIl.Create(OpCodes.Ret));
+}
+Console.WriteLine("patched challenge widget refresh -> " + restoreChallenge.FullName);
+
 //   2. WrapperDeckUtilities.TryImportDeck(importString, cardDatabase, ...): first
 //      importString = ForgeBridge.DeckImport.Rewrite(importString, cardDatabase)   (loose name matching, skip unknown cards)
 var rewrite = bridge.GetType("ForgeBridge.DeckImport").Methods.Single(m => m.Name == "Rewrite");

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using SharedClientCore.SharedClientCore.Code.PVPChallenge.Models;
 using Wizards.Mtga.PrivateGame.Challenges;
 
@@ -58,6 +59,24 @@ namespace ForgeBridge
             {
                 Log.Error("challenge slots: " + ex);
             }
+        }
+
+        // Arena's widget still forces legacy tournament slots to fixed deck positions after
+        // reading our table. Run after that refresh and restore the mapped position without
+        // firing a settings change back to the server.
+        public static void RestoreSelection(object widget, ChallengeMatchTypes matchType)
+        {
+            if (!ChallengeUtils.MatchTypeToInfo.TryGetValue(matchType, out var info) || !info.DeckType.HasValue) return;
+            var field = widget.GetType().GetField("_deckTypeSpinner", BindingFlags.Instance | BindingFlags.NonPublic);
+            var spinner = field?.GetValue(widget) as Spinner_OptionSelector;
+            if (spinner == null || spinner.ValueIndex == (int)info.DeckType.Value) return;
+            var listeners = spinner.onValueChanged;
+            try
+            {
+                spinner.onValueChanged = new Spinner_OptionSelector.SpinnerValueChangeEvent();
+                spinner.ValueIndex = (int)info.DeckType.Value;
+            }
+            finally { spinner.onValueChanged = listeners; }
         }
     }
 }

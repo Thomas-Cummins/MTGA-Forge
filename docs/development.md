@@ -78,6 +78,13 @@ The bridge uses the previously unused `DirectGameTournamentAlchemy` match slot a
 Keep `ChallengeSlots.Slots`, `ForgeFormats.DIRECT_SLOTS`, and `ChallengeService.FORMAT_OF` synchronized. The alias deliberately
 uses the constructed-type `Draft` spec rather than event-only `Limited`, so saved decks do not require a draft event.
 Both players need the updated bridge and server. No coordinator deployment is needed; it already accepts this challenge name.
+The client widget has hard-coded tournament-slot position overrides after its table lookup. The patcher hooks
+`UnifiedChallengeBladeWidget.SetChallengeOption_ChallengeType` so `ChallengeSlots.RestoreSelection` restores the mapped
+deck index after a refresh without sending a second settings change. Distribute the updated patcher as well as the bridge.
+The selection regression check runs independently of the game with `dotnet run --project tools/tests/ChallengeSlotsCheck`.
+It uses UI stand-ins to reproduce the legacy resets, tests all ten selections, and checks that the original listeners
+are preserved without emitting a second settings event. It does not substitute for the real two-player UI check below.
+
 Headless coverage is in `QueueCheck` (`tools\verify.ps1 -SkipClient -Only sp-queues`). In the real client, create a challenge,
 select Cube / 40-card, select a saved 40-card Draft deck containing a Commander-set card, ready both players, and start.
 Verify both best-of-one and best-of-three; a 39-card deck should be rejected and the existing formats should remain available.
