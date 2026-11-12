@@ -32,6 +32,10 @@ reproduce a bug or regression-test a feature without playing to it by chance. Ri
 
 ## Rigs
 
+The `deluge` rig puts Toxic Deluge in hand with three Swamps in play and an opposing Grizzly Bears. Run SelfPlay with
+`-Dmtga.deck=deluge -Dmtga.rig=deluge -Dselfplay.ai=plains`: it chooses X=3 and asserts the numeric prompt, 3-life payment,
+and creature death. The choice is bounded by payable life rather than available mana.
+
 | Rig | Setup | Used for |
 |---|---|---|
 | `sami` (deck `sami`) | Me: 3 Plains + 3 Ornithopter + Sami, Wildcat Captain in play, Wurmcoil Engine {6} in hand. AI: passive Mountains | Granted affinity (`AffectedZone$ Stack` statics) must make the hand spell castable and shown at {3}. SelfPlay asserts the shown cost is 3 |
