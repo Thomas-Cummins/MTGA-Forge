@@ -320,6 +320,13 @@ try {
         foreach ($rig in 'protection', 'protection-artifact') {
             if (Wanted "sp-$rig") { Run-SelfPlay "sp-$rig" $null "-Dmtga.deck=$rig -Dmtga.rig=$rig -Dselfplay.ai=plains -Dselfplay.fullcontrol=true" }
         }
+        foreach ($rig in 'fellwar', 'fellwar-empty', 'fellwar-colorless', 'fellwar-auto') {
+            if (Wanted "sp-$rig") {
+                $props = "-Dmtga.deck=$rig -Dmtga.rig=$rig -Dselfplay.ai=plains"
+                if ($rig -ne 'fellwar-auto') { $props += ' -Dselfplay.fullcontrol=true' }
+                Run-SelfPlay "sp-$rig" $null $props
+            }
+        }
         foreach ($f in 'Standard', 'Pioneer', 'Modern', 'Brawl') { if (Wanted "sp-$f") { Run-SelfPlay "sp-$f" $f } }
         # Legacy / Vintage / Pauper / Premodern: the built-in decks against each other (Moxen, Workshops, Tron... rather than generated piles)
         foreach ($f in 'Legacy', 'Vintage', 'Pauper', 'Premodern') { if (Wanted "sp-$f") { Run-SelfPlay "sp-$f" $null "-Dselfplay.builtin=$f" } }

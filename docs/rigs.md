@@ -44,6 +44,18 @@ headless recipes. They set the rig-specific deck, preserve the passive opponent 
 compilation, SelfPlay execution, and real-client verification remain pending: this checkout
 lacks the locally generated protocol schemas and client database.
 
+The `fellwar` rig puts Fellwar Stone and Grizzly Bears in play, Llanowar Elves in hand, and
+Forest + Island on the opposing battlefield. SelfPlay checks the Stone's manual color options
+are exactly green/blue, manually taps it for green, and casts the Elves. `fellwar-auto` instead
+checks the auto-tap preview includes the Stone and the cast succeeds. `fellwar-empty` and
+`fellwar-colorless` check the Stone is absent from manual actions when opposing lands produce
+no colored mana. These rigs use passive Wastes decks so later land drops do not add colors.
+
+Run `tools\verify.ps1 -SkipClient -Only sp-fellwar,sp-fellwar-auto,sp-fellwar-empty,sp-fellwar-colorless`.
+These recipes preserve the rig's passive decks and enable Full Control except in the auto-tap
+case. Java 17 syntax parsing passed; full compilation, SelfPlay execution, and real-client
+verification remain pending because the local schemas and client data are absent.
+
 The `spyglass` rig puts three Swamps and a five-loyalty Liliana of the Veil on the human battlefield with Sorcerous
 Spyglass in hand. SelfPlay names Liliana and checks her actions before and after Spyglass resolves, including that
 ordinary mana abilities remain available. Use `-Dmtga.deck=spyglass -Dmtga.rig=spyglass -Dselfplay.ai=plains`.
