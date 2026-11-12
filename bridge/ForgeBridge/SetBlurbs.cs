@@ -197,7 +197,7 @@ namespace ForgeBridge
         public static string PremierTitle(string key)
         {
             string name;
-            if (key.ToUpperInvariant() == CubeKey) return "Premier Draft: Vintage Cube";
+            if (key.ToUpperInvariant() == CubeKey) return "Premier Draft: " + (System.Environment.GetEnvironmentVariable("MTGA_FORGE_CUSTOM_CUBE_TITLE") ?? "Vintage Cube");
             return "Premier Draft: " + (Names.TryGetValue(key.ToUpperInvariant(), out name) ? name : key);
         }
 
@@ -206,7 +206,7 @@ namespace ForgeBridge
         {
             string blurb, lead;
             if (key.ToUpperInvariant() == CubeKey)
-                lead = "MTGO's Vintage Cube: 540 singleton powerhouses, the Power Nine included. ";
+                lead = System.Environment.GetEnvironmentVariable("MTGA_FORGE_CUSTOM_CUBE_DESCRIPTION") ?? "MTGO's Vintage Cube: 540 singleton powerhouses, the Power Nine included. ";
             else
                 lead = Text.TryGetValue(key.ToUpperInvariant(), out blurb) ? blurb + " " : "";
             return lead + "Draft at a table of eight, then play best-of-one matches against other players until 7 wins or 3 losses.";

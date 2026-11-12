@@ -70,6 +70,14 @@ The patcher's hooks name methods in `Core.dll`. After an MTGA update:
 
 ### Cube direct challenges
 
+For a shared custom Premier Draft pool, `tools/private-cube.ps1 -FriendCode <shared-code>` selects the local
+`PrewarIconic` cube and changes the event title for that session. The package needs matching files in
+`server/forge-gui/res/cube` and `server/forge-gui/res/draft`. Both players must install the same pool and use the same
+code; the existing Vintage Cube event id is reused, so the code is necessary to isolate it from the public table queue.
+The custom launch sets Java properties and bridge display environment variables only for its process tree.
+Launching normally retains Vintage Cube. Validate custom lists against Forge and the client's card database;
+the draft engine otherwise filters out cards the client cannot show.
+
 The Friends challenge screen includes **Cube / 40-card**. It uses the saved-deck `Draft` rules (40+ main-deck cards,
 supported non-rebalanced cards, no command zone), so Commander-set cards can be played in an ordinary cube deck.
 Save the deck as **Draft** in the deck builder. The existing Draft validator still limits nonbasic cards to four copies.
