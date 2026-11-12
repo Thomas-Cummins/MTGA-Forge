@@ -68,6 +68,12 @@ The patcher's hooks name methods in `Core.dll`. After an MTGA update:
 
 ## Testing
 
+Forge separates `SpellAbility.canPlay()` (timing and costs) from `checkRestrictions(player)` (static prohibitions).
+Human action enumeration must check both, and execution must recheck restrictions before paying. Otherwise Sorcerous
+Spyglass can correctly record a name while the named planeswalker's loyalty abilities remain offered to a human.
+The `spyglass` SelfPlay rig casts Spyglass, names Liliana of the Veil, and checks that her initially available loyalty
+abilities are no longer offered while mana abilities remain. Run with `-Dmtga.deck=spyglass -Dmtga.rig=spyglass -Dselfplay.ai=plains`.
+
 Casting-time X can be in a non-mana cost (`PayLife<X>` on Toxic Deluge). The human cast callback must announce that
 X before payment, using the non-mana cost's affordable bound; checking only `costHasManaX()` silently leaves it at zero.
 The `deluge` SelfPlay rig chooses X=3, checks the 0..20 prompt bounds, observes life falling to 17, and checks that the

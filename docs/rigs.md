@@ -32,6 +32,10 @@ reproduce a bug or regression-test a feature without playing to it by chance. Ri
 
 ## Rigs
 
+The `spyglass` rig puts three Swamps and a five-loyalty Liliana of the Veil on the human battlefield with Sorcerous
+Spyglass in hand. SelfPlay names Liliana and checks her actions before and after Spyglass resolves, including that
+ordinary mana abilities remain available. Use `-Dmtga.deck=spyglass -Dmtga.rig=spyglass -Dselfplay.ai=plains`.
+
 The `deluge` rig puts Toxic Deluge in hand with three Swamps in play and an opposing Grizzly Bears. Run SelfPlay with
 `-Dmtga.deck=deluge -Dmtga.rig=deluge -Dselfplay.ai=plains`: it chooses X=3 and asserts the numeric prompt, 3-life payment,
 and creature death. The choice is bounded by payable life rather than available mana.
