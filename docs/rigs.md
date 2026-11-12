@@ -32,6 +32,18 @@ reproduce a bug or regression-test a feature without playing to it by chance. Ri
 
 ## Rigs
 
+The `protection` rig puts Mother of Runes and Grizzly Bears in play. SelfPlay activates Mother,
+targets the Bears, chooses blue, and checks the engine actually grants protection from blue.
+`protection-artifact` instead casts Apostle's Blessing, explicitly accepts the artifact option,
+and checks protection from artifacts. Color choices use the existing color picker; non-color
+protection options use explicit yes/no prompts before the remaining color choices.
+
+Run `tools\verify.ps1 -SkipClient -Only sp-protection,sp-protection-artifact` for these two
+headless recipes. They set the rig-specific deck, preserve the passive opponent deck with
+`-Dselfplay.ai=plains`, and enable Full Control. Java 17 syntax parsing passed, but full
+compilation, SelfPlay execution, and real-client verification remain pending: this checkout
+lacks the locally generated protocol schemas and client database.
+
 The `spyglass` rig puts three Swamps and a five-loyalty Liliana of the Veil on the human battlefield with Sorcerous
 Spyglass in hand. SelfPlay names Liliana and checks her actions before and after Spyglass resolves, including that
 ordinary mana abilities remain available. Use `-Dmtga.deck=spyglass -Dmtga.rig=spyglass -Dselfplay.ai=plains`.

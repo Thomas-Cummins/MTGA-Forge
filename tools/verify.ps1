@@ -316,6 +316,10 @@ try {
     if (-not $SkipClient) { foreach ($k in $recipes.Keys) { if (Wanted $k) { Run-Recipe $k $recipes[$k] } } }
     if (-not $SkipSelfPlay) {
         if (Wanted 'sp-default') { Run-SelfPlay 'sp-default' $null }
+        # Human choices: preserve the rig's passive decks and enable manual decisions.
+        foreach ($rig in 'protection', 'protection-artifact') {
+            if (Wanted "sp-$rig") { Run-SelfPlay "sp-$rig" $null "-Dmtga.deck=$rig -Dmtga.rig=$rig -Dselfplay.ai=plains -Dselfplay.fullcontrol=true" }
+        }
         foreach ($f in 'Standard', 'Pioneer', 'Modern', 'Brawl') { if (Wanted "sp-$f") { Run-SelfPlay "sp-$f" $f } }
         # Legacy / Vintage / Pauper / Premodern: the built-in decks against each other (Moxen, Workshops, Tron... rather than generated piles)
         foreach ($f in 'Legacy', 'Vintage', 'Pauper', 'Premodern') { if (Wanted "sp-$f") { Run-SelfPlay "sp-$f" $null "-Dselfplay.builtin=$f" } }
